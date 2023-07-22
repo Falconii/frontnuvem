@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CarrosServices } from './services/carros.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [HttpClient],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [HttpClient, CarrosServices],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

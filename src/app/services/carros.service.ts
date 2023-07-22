@@ -11,7 +11,7 @@ export class CarrosServices {
 
   constructor(private http: HttpClient) {}
 
-  getClientes(): Observable<CarrosModel[]> {
+  getCarros(): Observable<CarrosModel[]> {
     return this.http.get<CarrosModel[]>(`${this.apiURL}getcarros`);
   }
 }
