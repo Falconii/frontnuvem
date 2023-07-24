@@ -1,7 +1,9 @@
+import { AponExecucaoService } from './services/apon-execucao.service';
 import { CarrosServices } from './services/carros.service';
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CarrosModel } from './models/Carros-Model';
+import { ApoExecucaoModel } from './models/apo-execucao-model';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +14,16 @@ export class AppComponent {
   title = 'Olha Eu Na Nuvem';
 
   inscricaoGetAll!: Subscription;
+  inscricaoMovimento!: Subscription;
 
   carros: CarrosModel[] = [];
 
-  constructor(private carrosServices: CarrosServices) {}
+  movimento: ApoExecucaoModel = new ApoExecucaoModel();
+
+  constructor(
+    private carrosServices: CarrosServices,
+    private aponExecucaoService: AponExecucaoService
+  ) {}
 
   ngOnInit(): void {
     this.getCarros();
@@ -23,6 +31,7 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.inscricaoGetAll?.unsubscribe();
+    this.inscricaoMovimento?.unsubscribe();
   }
 
   getCarros() {
@@ -36,5 +45,25 @@ export class AppComponent {
         console.log('Deu Merda', error);
       }
     );
+  }
+
+  insertMovi() {
+    let movi: ApoExecucaoModel = new ApoExecucaoModel();
+    this.inscricaoMovimento = this.aponExecucaoService
+      .ApoExecucaoInsert(movi)
+      .subscribe(
+        (data: ApoExecucaoModel) => {
+          this.movimento = data;
+          console.log(this.movimento);
+        },
+        (error: any) => {
+          this.carros = [];
+          console.log('Deu Merda', error);
+        }
+      );
+  }
+
+  onClickInsert(): void {
+    this.insertMovi();
   }
 }
