@@ -1,2 +1,15 @@
 <h1>Atenção !!!</h1>
 <h2>Preparando Para Acessar DB Na Nuvem!</h2>
+<table>
+  <tr>
+    <th>MODELO</th>
+    <th>COR</th>
+    <th>ANO</th>
+  </tr>
+  <tr *ngFor="let carro of carros">
+    <td>{{carro.modelo}}</td>
+    <td>{{carro.cor}}</td>
+    <td>{{carro.ano}}</td>
+  </tr>
+  <tr>
+</table>
